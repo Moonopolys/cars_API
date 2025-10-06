@@ -1,12 +1,9 @@
 from django.urls import path
-from .views import CarAPIView, OwnerAPIView, CreateAPIView, OwnerCreateAPIView
+from .views import CarDetailAPIView, CarAPIView, OwnerDetailAPIView, OwnerAPIView
 
 urlpatterns = [
     path('cars/', CarAPIView.as_view()),
-    path('cars/<int:pk>', CarAPIView.as_view()),
-    path('cars/create/', CreateAPIView.as_view()),
-    path('owner/', OwnerAPIView.as_view()),
-    path('owner/<int:pk>', OwnerAPIView.as_view()),
-    path('owner/create/', OwnerCreateAPIView.as_view()),
-
+    path('cars/<int:pk>/', CarDetailAPIView.as_view()),
+    path('owners/', OwnerAPIView.as_view()),
+    path('owners/<int:pk>/', OwnerDetailAPIView.as_view()),
 ]
