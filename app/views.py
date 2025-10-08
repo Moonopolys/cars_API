@@ -1,7 +1,10 @@
 from django.db.migrations.serializer import serializer_factory
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.decorators import permission_classes
+from rest_framework.filters import SearchFilter, OrderingFilter
+
 from .permissions import MyPermission
 
 from .models import Car, Owner
@@ -12,6 +15,9 @@ class CarAPIView(generics.ListCreateAPIView):
     queryset = Car.objects.order_by('-id')
     serializer_class = CarSerializer
     permission_classes = [MyPermission]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ['brand', 'color']
+    search_fields = ['brand', 'name', 'price']
 
     def get_queryset(self):
         q = self.queryset.all()
