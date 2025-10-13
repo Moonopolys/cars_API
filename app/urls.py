@@ -1,5 +1,9 @@
 from django.urls import path
 from .views import CarDetailAPIView, CarAPIView, OwnerDetailAPIView, OwnerAPIView
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+router.register('cars', CarAPIView, basename='car')
 
 urlpatterns = [
     path('cars/', CarAPIView.as_view()),
